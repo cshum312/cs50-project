@@ -8,7 +8,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import timedelta
 
 from helpers import error, login_required, flight_lookup
-import config
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv()
 
 # Configure application
 app = Flask(__name__)
@@ -19,8 +22,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # APIs
-flight_api = config.flight_api
-weather_api = config.weather_api
+flight_api = os.getenv('AIRLABS_DATA_API_KEY')
+weather_api = os.getenv('OPENWEATHER_API_KEY')
 
 # Configure database
 con = sqlite3.connect("flights.db", check_same_thread=False)

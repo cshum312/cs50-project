@@ -13,10 +13,27 @@ The project uses Python for the backend, with [Flask](https://flask.palletsproje
 Flag emojis are courtesy of [FlagCDN](https://flagcdn.com/) and the background video is from [Vecteezy](https://vecteezy.com/). Other miscellaneous icons are from [OnlineWebFonts](https://www.onlinewebfonts.com/icon).
 
 #### API Instructions:
-Upon cloning the repository, create a file 'config.py' to store your AirLabs API key and OpenWeather API key as follows:
+Upon cloning the repository, create a file '.env' to store your AirLabs API key and OpenWeather API key as follows:
 ```
-flight_api = {API KEY}
-weather_api = {API KEY}
+AIRLABS_DATA_API_KEY = {API KEY}
+OPENWEATHER_API_KEY = {API KEY}
+```
+
+#### Required packages:
+dotenv:
+```
+pip uninstall python-dotenv
+```
+
+Werkzeug:
+```
+pip install Werkzeug
+```
+
+Flask and Flask_Session:
+```
+pip install Flask
+pip install Flask-Session
 ```
 
 #### Usage Instructions:
