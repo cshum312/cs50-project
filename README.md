@@ -36,6 +36,11 @@ pip install Flask
 pip install Flask-Session
 ```
 
+requests:
+```
+pip install requests
+```
+
 #### Usage Instructions:
 Users may register an account and log in. Upon logging in, users may search for a flight number (IATA) and click 'follow'.
 This will add the flight to the user's list and provide updated flight status and current weather conditions whenever the page refreshes.
