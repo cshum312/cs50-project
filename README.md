@@ -1,8 +1,8 @@
-# flightbase
+# FlightBase
 #### Video Demo:  [Introductory Video] (link here)
 
 #### Description:
-Hello!
+Hello :smile:!
 
 This project is a simple web-app that allows registered users to track up to 5 flights, including the current details of the flight, origin airport, destination airport, as well as the weather at both locations. It provides users with the weather at both the origin and destination. All information is provided in one simple page for ease of use.
 
