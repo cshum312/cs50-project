@@ -1,0 +1,56 @@
+#airplaneVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+.navbar {
+  background-color: #333333;
+}
+
+.navbar-brand {
+  color: #FFFFFF;
+}
+
+.navbar-brand:hover {
+  color: #FFFFFF;
+}
+
+.nav-link {
+  color: #FFFFFF;
+}
+
+.btn-status {
+  background-color: #E1F4F3 !important;
+}
+
+.modal-header {
+  background-color: #333333 !important;
+  color: #FFFFFF !important;
+}
+
+.airplane {
+  vertical-align: middle;
+}
+
+.card {
+  background-color: #333333;
+}
+
+@media only screen and (max-width : 800px) {
+  .card {
+    width: 18em !important;
+  }
+}
+
+@media only screen and (min-width : 800px) {
+  .card {
+    width: 48em !important;
+  }
+}
+
+

@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block main %}
+    <form action="/" method="post">
+        <div class="row justify-content-md-center">
+            <div class="form-group mb-3 mb-md-3 col-md-auto">
+                <input autocomplete="off" autofocus class="form-control" id="flightSearch" name="flightSearch" placeholder="Flight Search" type="text">
+            </div>
+            <div class="form-group col-md-auto">
+                <button class="btn btn-success" type="submit">Follow</button>
+            </div>
+        </div>
+    </form>
+
+    <p></p>
+
+    {% for flight in userList %}
+
+        <!-- Flight Cards -->
+        <div class="card text-white mb-3 mx-auto">
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td style="width: 1%; color: #FFFFFF;">
+                                <img src="https://airlabs.co/img/airline/m/{{ flight["flight_logo"] }}.png" style="padding-bottom: 1em;">
+                                <form action="/" method="post">
+                                    <button class="btn btn-danger" id="flightRemove" name="flightRemove" type="submit" value="{{ flight["flight_number"] }}">Unfollow</button>
+                                </form>
+                            </td>
+                            <td style="text-align: right; color: #FFFFFF;">
+                                <h2>{{ flight["airline_name"] }}</h2>
+                                <p>{{ flight["flight_number"] }}</p>
+                                <p class="btn btn-status">{{ flight["status"] }}</p>
+                                <p style="text-align: right; color: #FFFFFF;">
+                                    <img src="https://flagcdn.com/16x12/{{ flight["dep_flag"] }}.png" width="16" height="12">
+                                    {{ flight["dep_city"] }} 
+                                    &#10145;&#65039;
+                                    <img src="https://flagcdn.com/16x12/{{ flight["arr_flag"] }}.png" width="16" height="12">
+                                    {{ flight["arr_city"] }} 
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td style="width: {{ flight["progress"] }}%; padding: 0; vertical-align: middle;">
+                                <div style="border-bottom: 2px solid #E1F4F3;"></div>
+                            </td>
+                            <td style="width: 1%; padding: 0; vertical-align: middle;">
+                                <img src="/static/airplane.png" class="airplane" width="35" height="35">
+                            </td>
+                            <td style="padding: 0; vertical-align: middle;">
+                                <div style="border-bottom: 2px dashed #706C61;"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <td class="border-end border-white" style="width:50%; text-align: left; color: #FFFFFF;">
+                                <h3>{{ flight["dep_iata"] }}</h3>
+                                <p>{{ flight["dep_name"] }}, {{ flight["dep_code"] }}</p>
+                                <span>
+                                    Departure Time:
+                                    <b> {{ flight["dep_time"] }}</b>
+                                </span>
+                                <span>
+                                    <button type="button" class="btn btn-primary" style="float: center" data-bs-toggle="modal" data-bs-target="#{{ flight["dep_iata"] }}">Check Weather</button>
+                                </span>
+                            </td>
+                            <td style="text-align: right; color: #FFFFFF;">
+                                <h3>{{ flight["arr_iata"] }}</h3>
+                                <p>{{ flight["arr_name"] }}, {{ flight["arr_code"] }}</p>
+                                <span>
+                                    Arrival Time:
+                                    <b> {{ flight["arr_time"] }}</b>
+                                </span>
+                                <span>
+                                    <button type="button" class="btn btn-primary" style="float: center" data-bs-toggle="modal" data-bs-target="#{{ flight["arr_iata"] }}">Check Weather</button>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Weather Modals -->
+        <div class="modal fade" id="{{ flight["dep_iata"] }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Weather Info: {{ flight["dep_city"] }}, {{ flight["dep_code"] }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img src="https://openweathermap.org/img/wn/{{ flight["dep_weatherIcon"]}}@2x.png">
+                            <h2>Current: {{ flight["dep_temp"]}}°C</h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td style="width:50%;">
+                                        <div>
+                                            <b>Description: </b>
+                                            <p>{{ flight["dep_weather"]}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <b>Temperature Range: </b>
+                                            <p>{{ flight["dep_tempMin"]}}°C - {{ flight["dep_tempMax"]}}°C</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="{{ flight["arr_iata"] }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Weather Info: {{ flight["arr_city"] }}, {{ flight["arr_code"] }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <img src="https://openweathermap.org/img/wn/{{ flight["arr_weatherIcon"]}}@2x.png">
+                            <h2>Current: {{ flight["arr_temp"]}}°C</h2>
+                        </div>
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td style="width:50%;">
+                                        <div>
+                                            <b>Description: </b>
+                                            <p>{{ flight["arr_weather"]}}</p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <b>Temperature Range: </b>
+                                            <p>{{ flight["arr_tempMin"]}}°C - {{ flight["arr_tempMax"]}}°C</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}
