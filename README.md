@@ -1,5 +1,5 @@
 # FlightBase
-#### Video Demo:  [Introductory Video] (https://youtu.be/-UNtKmqMSNQ)
+#### Video Demo:  [Introductory Video](https://youtu.be/-UNtKmqMSNQ)
 
 #### Quick Start: [App Link](https://flightbase.onrender.com/)
 
